@@ -1,0 +1,28 @@
+---
+import type { BusinessInfo } from '../components/SEO.astro'; // Import the type
+import BASEHEAD from '../components/BaseHead.astro'
+import NAV from '../components/Nav.astro'
+import FOOTER from '../components/Footer.astro'
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  type?: 'website' | 'article';
+  businessInfo?: BusinessInfo;
+}
+
+const { title, description, image, type, businessInfo } = Astro.props;
+---
+
+<html lang="en">
+  <BASEHEAD 
+        title={title} 
+      description={description} 
+      image={image} 
+      type={type} 
+      businessInfo={businessInfo}>
+  </BASEHEAD>
+ 
+      <slot /> <!-- This is where page content goes -->
+</html>
