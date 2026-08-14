@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+@theme {
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+
+    --white-hsl: 32, 0%, 100%;
+    --lightAccent-hsl: 32, 25%, 88%;
+    --accent-hsl: 7, 100%, 67%;
+    --darkAccent-hsl: 192, 90%, 12%;
+    --black-hsl: 192, 90%, 12%;
+    --safeLightAccent-hsl: 7, 100%, 67%;
+    --safeDarkAccent-hsl: 7, 100%, 67%;
+    --safeInverseAccent-hsl: 32, 0%, 100%;
+    --safeInverseLightAccent-hsl: 32, 0%, 100%;
+    --safeInverseDarkAccent-hsl:32, 0%, 100%
+}

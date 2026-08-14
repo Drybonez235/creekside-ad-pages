@@ -1,0 +1,86 @@
+---
+const SITE_DEFAULT_TITLE = 'Canvas Homes | Real Estate Brokerage in Tennessee';
+const SITE_DEFAULT_DESC = 'Canvas Forum is an exclusive real estate brokerage where homeowners can make quick cash sales and buyers can discover their next investment property.';
+const SITE_DEFAULT_IMG = '/canvas-homes-logo-nobg.png'; // Placed in public/ folder
+
+export interface BusinessInfo {
+  name: string;
+  legalName?: string;
+  url: string;
+  logo: string;
+  description: string;
+  telephone?: string;
+  address: {
+    streetAddress: string;
+    addressLocality: string; // City
+    addressRegion: string;   // State/Province (e.g., "NY")
+    postalCode: string;
+    addressCountry: string;  // (e.g., "US")
+  };
+}
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL;
+  type?: 'website' | 'article';
+  businessInfo?: BusinessInfo;
+}
+
+
+const {
+  title = SITE_DEFAULT_TITLE,
+  description = SITE_DEFAULT_DESC,
+  image = SITE_DEFAULT_IMG,
+  type = 'website',
+  businessInfo,
+} = Astro.props;
+
+const canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Astro.site);
+const formattedTitle = title === SITE_DEFAULT_TITLE ? title : `${title} | ${SITE_DEFAULT_TITLE}`;
+
+let jsonLD = null;
+
+if (businessInfo) {
+  jsonLD = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": businessInfo.name,
+    "legalName": businessInfo.legalName || businessInfo.name,
+    "url": businessInfo.url,
+    "logo": businessInfo.logo,
+    "image": image, // Fallback to the page's open graph image for search engines
+    "description": businessInfo.description,
+    "telephone": businessInfo.telephone,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": businessInfo.address.streetAddress,
+      "addressLocality": businessInfo.address.addressLocality,
+      "addressRegion": businessInfo.address.addressRegion,
+      "postalCode": businessInfo.address.postalCode,
+      "addressCountry": businessInfo.address.addressCountry,
+    }
+  };
+}
+---
+
+<link rel="canonical" href={canonicalURL} />
+
+<title>{formattedTitle}</title>
+<meta name="title" content={formattedTitle} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={formattedTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={formattedTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+{jsonLD && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+)}
