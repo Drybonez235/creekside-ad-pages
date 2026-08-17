@@ -1,5 +1,5 @@
 ---
-const SITE_DEFAULT_TITLE = 'Canvas Homes | Real Estate Brokerage in Tennessee';
+const SITE_DEFAULT_TITLE = 'Canvas Homes: Real Estate Brokerage in Tennessee and North Carolina';
 const SITE_DEFAULT_DESC = 'Canvas Forum is an exclusive real estate brokerage where homeowners can make quick cash sales and buyers can discover their next investment property.';
 const SITE_DEFAULT_IMG = '/canvas-homes-logo-nobg.png'; // Placed in public/ folder
 
@@ -37,7 +37,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Astro.site);
-const formattedTitle = title === SITE_DEFAULT_TITLE ? title : `${title} | ${SITE_DEFAULT_TITLE}`;
+const formattedTitle = title === `${SITE_DEFAULT_TITLE}`;
 
 let jsonLD = null;
 
