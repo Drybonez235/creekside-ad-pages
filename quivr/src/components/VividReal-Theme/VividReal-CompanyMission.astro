@@ -1,0 +1,53 @@
+---
+// src/components/MissionStatement.astro
+interface Props {
+  logoSrc?: string;
+  logoAlt?: string;
+  eyebrow?: string;
+  heading?: string;
+  statement?: string;
+}
+
+const {
+  logoSrc = "https://api.iconify.design/lucide:aperture.svg?color=%23818cf8", // Replace with your logo SVG/PNG path
+  logoAlt = "Company Logo",
+  eyebrow = "Our Purpose",
+  heading = "Transforming Visual Storytelling",
+  statement = "We empower creators and brands to craft unforgettable digital experiences through uncompromising visual fidelity, intuitive component architecture, and lightning-fast performance.",
+} = Astro.props;
+---
+
+<section class="relative w-full bg-gray-200 px-6 py-20 sm:py-28 text-black overflow-hidden">
+  <!-- Subtle ambient glow in the background -->
+  <div class="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none">
+    <div class="h-[300px] w-[500px] rounded-full bg-gray-500/20 blur-3xl"></div>
+  </div>
+
+  <div class="mx-auto max-w-4xl text-center">
+    <!-- Company Logo Spot -->
+    <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 p-3.5 ring-1 ring-white/10 backdrop-blur-md shadow-inner">
+      <img
+        src={logoSrc}
+        alt={logoAlt}
+        class="h-full w-full object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Eyebrow Label -->
+    <span class="text-xs font-semibold uppercase tracking-widest text-indigo-400">
+      {eyebrow}
+    </span>
+
+    <!-- Mission Statement Heading -->
+    <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl text-gray-900">
+      {heading}
+    </h2>
+
+    <!-- Mission Statement Text -->
+    <p class="mt-6 text-lg sm:text-xl font-normal leading-relaxed text-gray-500 max-w-3xl mx-auto">
+      "{statement}"
+    </p>
+  </div>
+</section>
